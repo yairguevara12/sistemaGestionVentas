@@ -17,7 +17,10 @@
   <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
   <!--    Datatables  -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
+  <!--  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" /> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+
   <!--    Datatables  -->
 
   <!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -42,7 +45,7 @@
   <!-----------------------------------------------------------------------JS FILES------------------------------------------------------------------------------------------------------------>
 
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 
@@ -61,20 +64,44 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="<?php echo constant('URL') ?>main">Registrar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">-</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">-</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">-</a>
-          </li>
-        </ul>
+        <?php
+
+        if (isset($_SESSION['idUsuario'])) { ?>
+
+          <div class="d-flex justify-content-between">
+            <div>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="<?php echo constant('URL') ?>main">Registrar</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="" href="<?php echo constant('URL') ?>registroVentas">Registro Ventas</a>
+                </li>
+            </div>
+            <div>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link link-btn text-success fw-bold" href="#" id="perfilUsuario"><?php if (isset($_SESSION["idPerfilUsuario"])) {
+                                                                                                  if ($_SESSION["idPerfilUsuario"] == "1") {
+                                                                                                    echo "asesor";
+                                                                                                  } else   if ($_SESSION["idPerfilUsuario"] == "2") {
+                                                                                                    echo "supervisor";
+                                                                                                  } else   if ($_SESSION["idPerfilUsuario"] == "3") {
+                                                                                                    echo "backoffice";
+                                                                                                  }
+                                                                                                }   ?></a>
+
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link link-danger btn fw-bold" href="<?php echo constant('URL') ?>main/cerrarsesion">SALIR</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
+
+        <?php } ?>
       </div>
     </div>
   </nav>

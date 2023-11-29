@@ -47,6 +47,74 @@ $('#nivel2').change(function () {
 });
 
 
+
+$('#nivel2').change(function () {
+    if ($(this).val() === 'venta') {
+        clean("nivel3");
+        addoption("nivel3", "Acepta_Upgrade", "Acepta Upgrade");
+
+    } else if ($(this).val() === 'agendado') {
+        clean("nivel3");
+        addoption("nivel3", "Renovacion_De_Equipo", "Renovacion de equipo");
+        addoption("nivel3", "Acepta_Upgrade_Y_Renovacion_De_Equipo", "Acepta Upgrade Y Renovacion De Equipo");
+        addoption("nivel3", "Cliente_Interesado", "Cliente Interesado");
+
+    } else if ($(this).val() === 'No_Venta') {
+        clean("nivel3");
+        addoption("nivel3", "Corta_Llamada", "Corta Llamada");
+        addoption("nivel3", "Plan_muy_caro", "Plan muy caro");
+        addoption("nivel3", "Buzon", "buzon");
+
+    } else if ($(this).val() === 'No_Llamar') {
+        clean("nivel3");
+        addoption("nivel3", "CLiente_no_desea_recibir_llamadas", "CLiente no desea recibir llamadas");
+
+
+    } else if ($(this).val() === 'Llamada_Vicio') {
+        clean("nivel3");
+        addoption("nivel3", "Llamada vacia", "Llamada vacia");
+
+
+    }
+});
+$('#tipoDocumento').change(function () {
+    if ($(this).val() === 'DNI') {
+        ocultarElemento("activacionInmediata");
+        ocultarElemento("labelactivacionInmediata")
+        MostrarElemento("nrosn");
+        MostrarElemento("labelnrosn");
+    } else if ($(this).val() === 'C.E') {
+        ocultarElemento("nrosn");
+        ocultarElemento("labelnrosn");
+        MostrarElemento("activacionInmediata");
+        MostrarElemento("labelactivacionInmediata");
+
+    } else if ($(this).val() === 'RUC') {
+        ocultarElemento("nrosn");
+        ocultarElemento("activacionInmediata");
+        ocultarElemento("labelactivacionInmediata")
+        ocultarElemento("labelnrosn");
+
+
+    } else if ($(this).val() === 'PASAPORTE') {
+        ocultarElemento("nrosn");
+        ocultarElemento("activacionInmediata");
+        ocultarElemento("labelactivacionInmediata")
+        ocultarElemento("labelnrosn");
+
+    }
+});
+
+
+function ocultarElemento(element) {
+    $("#" + element).hide();
+}
+function MostrarElemento(element) {
+
+    $("#" + element).show();
+
+}
+
 function clean(div) {
     $('#' + div)
         .find('option')
@@ -104,7 +172,6 @@ function registrarVenta() {
         type: 'post',
         success: function (response) {
             var result = $.parseJSON(response);
-            searchproduct(result);
         }
     });
 }

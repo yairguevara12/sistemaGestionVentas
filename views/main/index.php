@@ -1,6 +1,5 @@
 <?php
 require_once("views/header.php");
-echo $_SESSION["idUsuario"];
 ?>
 
 
@@ -51,11 +50,11 @@ echo $_SESSION["idUsuario"];
       </div>
 
       <div class="form-group">
-        <label for="nrosn" class="text-uppercase">N° SN:</label>
+        <label for="nrosn" class="text-uppercase" id="labelnrosn">N° SN:</label>
         <select class="form-control" id="nrosn">
           <option value="seleccione">[seleccione]</option>
-          <option value="ILIMITADO">Si</option>
-          <option value="REGULAR">No</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
 
         </select>
       </div>
@@ -97,7 +96,7 @@ echo $_SESSION["idUsuario"];
       </div>
 
       <div class="form-group">
-        <label for="activacionInmediata" class="text-uppercase">ACTIVACIÓN INMEDITA:</label>
+        <label for="activacionInmediata" class="text-uppercase" id="labelactivacionInmediata">ACTIVACIÓN INMEDITA:</label>
         <select class="form-control" id="activacionInmediata">
           <option value="Si">Si</option>
           <option value="No">No</option>

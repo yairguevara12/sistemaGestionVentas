@@ -20,13 +20,13 @@ class ConsultasAjax
         $cadenasql->bindParam(5, $apellidos, PDO::PARAM_STR);
         $SeGuardo = $cadenasql->execute();
         $resultado = $cadenasql->fetch(PDO::FETCH_ASSOC);
-        return $SeGuardo;
         $this->Conexion->CerrarConexion();
+        return $SeGuardo;
     }
-    function RegistrarVentaDetalles($tipo_de_plan, $nivel_1, $nivel_2, $nivel_3, $nsn, $activacion_inmediata, $observaciones)
+    function RegistrarVentaDetalles($tipo_de_plan, $nivel_1, $nivel_2, $nivel_3, $nsn, $activacion_inmediata, $observaciones, $fecha)
     {
         $ConexionEstablecida = $this->Conexion->Conexion();
-        $cadenasql = $ConexionEstablecida->prepare("insert INTO venta_detalles(tipo_de_plan, nivel_1, nivel_2, nivel_3, nsn, activacion_inmediata, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $cadenasql = $ConexionEstablecida->prepare("INSERT INTO venta_detalles (tipo_de_plan, nivel_1, nivel_2, nivel_3, nsn, activacion_inmediata, observaciones, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $cadenasql->bindParam(1, $tipo_de_plan, PDO::PARAM_STR);
         $cadenasql->bindParam(2, $nivel_1, PDO::PARAM_STR);
         $cadenasql->bindParam(3, $nivel_2, PDO::PARAM_STR);
@@ -34,10 +34,12 @@ class ConsultasAjax
         $cadenasql->bindParam(5, $nsn, PDO::PARAM_STR);
         $cadenasql->bindParam(6, $activacion_inmediata, PDO::PARAM_BOOL);
         $cadenasql->bindParam(7, $observaciones, PDO::PARAM_STR);
+        $cadenasql->bindParam(8, $fecha, PDO::PARAM_STR);
+
         $SeGuardo = $cadenasql->execute();
-        $resultado = $cadenasql->fetch(PDO::FETCH_ASSOC);
-        return $SeGuardo;
         $this->Conexion->CerrarConexion();
+
+        return $SeGuardo;
     }
     function RegistrarVenta($asesor_id, $estado_venta_id, $estado_backoffice_id, $cliente_id, $venta_detalles_id)
     {
@@ -51,8 +53,8 @@ class ConsultasAjax
         $cadenasql->bindParam(5, $venta_detalles_id, PDO::PARAM_INT);
         $SeGuardo = $cadenasql->execute();
         $resultado = $cadenasql->fetch(PDO::FETCH_ASSOC);
-        return $SeGuardo;
         $this->Conexion->CerrarConexion();
+        return $SeGuardo;
     }
     function ObtenerUltimoClienteId()
     {
@@ -76,5 +78,75 @@ class ConsultasAjax
         $this->Conexion->CerrarConexion();
 
         return $ultimoId;
+    }
+
+
+    function ObternerRegistroVentas()
+    {
+        $ConexionEstablecida = $this->Conexion->Conexion();
+        $cadenasql = $ConexionEstablecida->prepare("CALL GetSalesDetails()");
+        $cadenasql->execute();
+        $result = $cadenasql->fetchAll(PDO::FETCH_ASSOC);
+        $this->Conexion->CerrarConexion();
+
+        return $result;
+    }
+
+
+    function ObtenerFullRegistroVentas($ventaId)
+    {
+        $ConexionEstablecida = $this->Conexion->Conexion();
+        $cadenasql = $ConexionEstablecida->prepare("CALL GetFullSalesByVentaId(:ventaId)");
+        $cadenasql->bindParam(':ventaId', $ventaId, PDO::PARAM_INT);
+        $cadenasql->execute();
+        $result = $cadenasql->fetch(PDO::FETCH_ASSOC);
+        $this->Conexion->CerrarConexion();
+
+        return $result;
+    }
+
+
+    function obtenerRegistroVentabyfecha($fecha_begin, $fecha_end)
+    {
+        $ConexionEstablecida = $this->Conexion->Conexion();
+        $cadenasql = $ConexionEstablecida->prepare("CALL ObtenerRegistroVentabyFecha(:fecha_begin, :fecha_end)");
+        $cadenasql->bindParam(':fecha_begin', $fecha_begin, PDO::PARAM_STR);
+        $cadenasql->bindParam(':fecha_end', $fecha_end, PDO::PARAM_STR);
+        $cadenasql->execute();
+        $result = $cadenasql->fetchAll(PDO::FETCH_ASSOC);
+        $this->Conexion->CerrarConexion();
+
+        return $result;
+    }
+
+
+    function updateVentaDetalleSeguimientoVenta(
+
+        $venta_id,
+        $planBase,
+        $ciclo,
+        $planAMigrar,
+        $departamento,
+        $tipoDeFc,
+        $TipoDeVenta,
+        $EstadoDeVenta
+    ) {
+        $ConexionEstablecida = $this->Conexion->Conexion();
+
+        // Use CALL to execute the stored procedure with parameters
+        $cadenasql = $ConexionEstablecida->prepare("CALL UpdateVentaDetalleSeguimientoVenta(:venta_id, :planBase, :ciclo, :planAMigrar, :departamento, :tipoDeFc, :TipoDeVenta , :EstadoDeVenta)");
+
+        $cadenasql->bindParam(':venta_id', $venta_id, PDO::PARAM_INT);
+        $cadenasql->bindParam(':planBase', $planBase, PDO::PARAM_STR);
+        $cadenasql->bindParam(':ciclo', $ciclo, PDO::PARAM_STR);
+        $cadenasql->bindParam(':planAMigrar', $planAMigrar, PDO::PARAM_STR);
+        $cadenasql->bindParam(':departamento', $departamento, PDO::PARAM_STR);
+        $cadenasql->bindParam(':tipoDeFc', $tipoDeFc, PDO::PARAM_STR);
+        $cadenasql->bindParam(':TipoDeVenta', $TipoDeVenta, PDO::PARAM_STR);
+        $cadenasql->bindParam(':EstadoDeVenta', $EstadoDeVenta, PDO::PARAM_INT);
+        $cadenasql->execute();
+
+        // Close the database connection
+        $this->Conexion->CerrarConexion();
     }
 }

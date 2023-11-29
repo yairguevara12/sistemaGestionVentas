@@ -17,17 +17,17 @@ $tipo_de_plan = $_POST["tipoPlan"];
 $nivel_1 = $_POST["nivel1"];
 $nivel_2 = $_POST["nivel2"];
 $nivel_3 = $_POST["nivel3"];
-$nsn = ($_POST["nrosn"] == "Si") ? 1 : 0; // Convert "Si" to 1 and "No" to 0
-$activacion_inmediata = ($_POST["activacionInmediata"] == "Si") ? 1 : 0; // Convert "Si" to 1 and "No" to 0
+$nsn = ($_POST["nrosn"] == "Si") ? 1 : 0;
+$activacion_inmediata = ($_POST["activacionInmediata"] == "Si") ? 1 : 0;
 $observaciones = $_POST["observaciones"];
 $idUsuario = $_POST["idUsuario"];
-echo $idUsuario;
+$fechaactual = date('Y-m-d');
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&  strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 
 
 
     $consultas->RegistrarCliente($telefono, $tipo_de_documento, $nro_de_documento, $nombres, $apellidos);
-    $consultas->RegistrarVentaDetalles($tipo_de_plan, $nivel_1, $nivel_2, $nivel_3, $nsn, $activacion_inmediata, $observaciones);
+    $consultas->RegistrarVentaDetalles($tipo_de_plan, $nivel_1, $nivel_2, $nivel_3, $nsn, $activacion_inmediata, $observaciones, $fechaactual);
 
 
     $estado_venta_id = 1;
