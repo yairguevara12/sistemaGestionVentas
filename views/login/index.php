@@ -43,7 +43,6 @@ require_once("views/header.php");
                 <input type="submit" class="login-submit-input" value="Iniciar Sesion" />
             </div>
             <div>
-                <p><a href="<?php echo constant('URL') ?>registrar">¿Aun no tienes una cuenta? Crea Una</a></p>
             </div>
         </form>
     </div>
