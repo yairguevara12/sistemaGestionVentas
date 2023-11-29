@@ -185,7 +185,6 @@ function obtenerRegistrobyfecha(fechainicio, fechafinal) {
         success: function (response) {
             var result = $.parseJSON(response);
             let newResult = result.map((row) => {
-                /* console.log(row); */
                 let newRow = {
                     estado_venta_nombre: row.estado_venta_nombre,
                     fecha: row.fecha == null ? "-" : row.fecha,
@@ -237,7 +236,6 @@ function mostrarFormularioSeguimientoVenta(idventa) {
 function actualizarValoresSeguimientoVenta() {
     var url = "http://localhost/SistemaGestionVentas/controllers/AjaxUpdateVentaDetalleSeguimientoVenta.php";
 
-    // Get values from form elements
     var idventa = $("#id_venta_seguimiento").text();
     var planBase = $("#plan_base").val();
     var ciclo = $("#ciclo").val();
@@ -246,7 +244,6 @@ function actualizarValoresSeguimientoVenta() {
     var tipoDeFc = $("#tipo_de_fc").val();
     var tipoDeVenta = $("#tipo_de_venta").val();
     var estadoDeVenta = $("#estado_de_venta").val();
-    // Create data object to send in the Ajax request
     var formData = {
         "venta_id": idventa,
         "planBase": planBase,

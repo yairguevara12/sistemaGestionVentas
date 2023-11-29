@@ -2,7 +2,7 @@
 ///importamos las constantes 
 
 ////Inicio
-/* require_once("bd/Conexion.php"); */
+require_once("bd/Conexion.php");
 
 require_once("config/config.php");
 
