@@ -133,7 +133,6 @@ class ConsultasAjax
     ) {
         $ConexionEstablecida = $this->Conexion->Conexion();
 
-        // Use CALL to execute the stored procedure with parameters
         $cadenasql = $ConexionEstablecida->prepare("CALL UpdateVentaDetalleSeguimientoVenta(:venta_id, :planBase, :ciclo, :planAMigrar, :departamento, :tipoDeFc, :TipoDeVenta , :EstadoDeVenta)");
 
         $cadenasql->bindParam(':venta_id', $venta_id, PDO::PARAM_INT);
@@ -146,7 +145,6 @@ class ConsultasAjax
         $cadenasql->bindParam(':EstadoDeVenta', $EstadoDeVenta, PDO::PARAM_INT);
         $cadenasql->execute();
 
-        // Close the database connection
         $this->Conexion->CerrarConexion();
     }
 }

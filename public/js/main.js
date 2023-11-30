@@ -135,7 +135,6 @@ function addoption(tipo, value, text) {
 function registrarVenta() {
     var url = "http://localhost/SistemaGestionVentas/controllers/AjaxMainRegistro.php";
 
-    // Get values from form elements
     var telefono = $("#telefono").val();
     var tipoDocumento = $("#tipoDocumento").val();
     var nroDocumento = $("#nroDocumento").val();
@@ -149,7 +148,6 @@ function registrarVenta() {
     var activacionInmediata = $("#activacionInmediata").val();
     var observaciones = $("#observaciones").val();
     var idUsuario = $("#idUsuario").val();
-    // Create data object to send in the Ajax request
     var formData = {
         "telefono": telefono,
         "tipoDocumento": tipoDocumento,

@@ -16,22 +16,18 @@ require_once("views/header.php");
             <input type="date" id="fechafinal" alt="fin" />
         </div>
         <div class="d-flex flex-sm-row ">
-            <button class="mx-5" onclick="mostrarRegistrosbyFecha()">Buscar</button>
+            <button class="mx-5 btn btn-secondary" onclick="mostrarRegistrosbyFecha()">Buscar</button>
 
         </div>
     </div>
 </div>
-<div class="container">
-    <table class="table container " id="tableRegistroVentas">
+<div class="container mb-5 ">
+    <table class="table container table-hover " id="tableRegistroVentas">
 
     </table>
 </div>
 
 <!--modal-->
-
-<?php
-echo $_SESSION["idPerfilUsuario"];
-?>
 
 
 <!-- The Modal -->

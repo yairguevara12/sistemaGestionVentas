@@ -77,6 +77,9 @@
                 <li class="nav-item">
                   <a class="nav-link" id="" href="<?php echo constant('URL') ?>registroVentas">Registro Ventas</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="" href="<?php echo constant('URL') ?>registroVentas">Pendiente Upgrade</a>
+                </li>
             </div>
             <div>
               <ul class="navbar-nav">
