@@ -175,7 +175,7 @@ DELIMITER ;
 
 CALL ObtenerRegistroVentabyFecha('2023-04-10','2023-11-10');
 
-/_ Procedimiento para actualizar detalles de venta y venta basado en venta_id _/
+/_Procedimiento para actualizar detalles de venta y venta basado en venta_id _/
 DELIMITER //
 CREATE PROCEDURE UpdateVentaDetalleSeguimientoVenta(
 IN p_venta_id INT,
