@@ -1,3 +1,4 @@
+-- Crear la base de datos SistemaGestionDeVentas;
 CREATE DATABASE SistemaGestionDeVentas;
 USE SistemaGestionDeVentas;
 
@@ -80,20 +81,12 @@ tipoDeFc VARCHAR(50),
 TipoDeVenta VARCHAR(50)
 );
 
-/_ Eliminar fila de venta_detalles _/
-DELETE FROM venta_detalles WHERE venta_detalle_id = 4;
-SET FOREIGN_KEY_CHECKS = 0;
-SET FOREIGN_KEY_CHECKS = 1;
-
 -- Insertar perfiles de usuarios
 INSERT INTO usuarios (perfil_id, nombre, email, usuario, clave)
-VALUES (1, 'carlitos', 'correo@example.com', 'carlitos', 'Rw154NY=');
-
-INSERT INTO usuarios (perfil_id, nombre, email, usuario, clave)
-VALUES (2, 'santitos', 'correo1@example.com', 'santitos', 'Rw154NY=');
-
-INSERT INTO usuarios (perfil_id, nombre, email, usuario, clave)
-VALUES (3, 'marquitos', 'correo2@example.com', 'marquitos', 'Rw154NY=');
+VALUES
+(1, 'carlitos', 'correo@example.com', 'carlitos', 'Rw154NY='),
+(2, 'santitos', 'correo1@example.com', 'santitos', 'Rw154NY='),
+(3, 'marquitos', 'correo2@example.com', 'marquitos', 'Rw154NY=');
 
 -- Insertar estados para ventas
 INSERT INTO estados_venta (nombre) VALUES ('pendiente');
@@ -104,7 +97,7 @@ INSERT INTO estados_venta (nombre) VALUES ('rechazada');
 INSERT INTO estados_backoffice (nombre) VALUES ('pendiente');
 -- Agregar más estados para backoffice según sea necesario;
 
-/_ Procedimiento para obtener detalles de ventas _/
+-- Procedimiento para obtener detalles de ventas
 DELIMITER //
 CREATE PROCEDURE GetSalesDetails()
 BEGIN
@@ -124,7 +117,7 @@ DELIMITER ;
 
 CALL GetSalesDetails();
 
-/_ Procedimiento para obtener detalles completos de ventas por venta_id _/
+-- Procedimiento para obtener detalles completos de ventas por venta_id
 DELIMITER //
 CREATE PROCEDURE GetFullSalesByVentaId(IN ventaId INT)
 BEGIN
@@ -150,10 +143,10 @@ v.id = ventaId;
 END //
 DELIMITER ;
 
-/_ Insertar más datos _/
+-- Insertar más datos
 -- Agregar más datos a las tablas según sea necesario;
 
-/_ Procedimiento para obtener registros de venta por rango de fechas _/
+-- Procedimiento para obtener registros de venta por rango de fechas
 DELIMITER //
 CREATE PROCEDURE ObtenerRegistroVentabyFecha(IN fecha_begin DATE, IN fecha_end DATE)
 BEGIN
@@ -173,9 +166,9 @@ venta_detalles.fecha BETWEEN fecha_begin AND fecha_end;
 END //
 DELIMITER ;
 
-CALL ObtenerRegistroVentabyFecha('2023-04-10','2023-11-10');
+CALL ObtenerRegistroVentabyFecha('2023-04-10', '2023-11-10');
 
-/_Procedimiento para actualizar detalles de venta y venta basado en venta_id _/
+-- Procedimiento para actualizar detalles de venta y venta basado en venta_id
 DELIMITER //
 CREATE PROCEDURE UpdateVentaDetalleSeguimientoVenta(
 IN p_venta_id INT,
